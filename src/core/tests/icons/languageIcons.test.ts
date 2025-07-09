@@ -80,7 +80,7 @@ describe('language icons', () => {
       { name: 'c', ids: ['c', 'd'], disabled: true },
     ];
 
-    config.activeIconPack = '';
+    config.activeIconPack = [];
     const manifest = createEmptyManifest();
     const iconDefinitions = loadLanguageIconDefinitions(
       languageIcons,

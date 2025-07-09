@@ -81,7 +81,7 @@ describe('file icons', () => {
     };
 
     const manifest = createEmptyManifest();
-    config.activeIconPack = '';
+    config.activeIconPack = [];
     const iconDefinitions = loadFileIconDefinitions(
       fileIcons,
       config,

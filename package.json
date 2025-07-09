@@ -154,32 +154,60 @@
       "title": "%configuration.title%",
       "properties": {
         "material-icon-theme.activeIconPack": {
-          "type": "string",
-          "default": "angular",
-          "description": "%configuration.activeIconPack%",
-          "enumDescriptions": [
-            "%configuration.activeIconPack.angular%",
-            "%configuration.activeIconPack.angular_ngrx%",
-            "%configuration.activeIconPack.react%",
-            "%configuration.activeIconPack.react_redux%",
-            "%configuration.activeIconPack.roblox%",
-            "%configuration.activeIconPack.qwik%",
-            "%configuration.activeIconPack.vue%",
-            "%configuration.activeIconPack.vue_vuex%",
-            "%configuration.activeIconPack.nest%",
-            "%configuration.activeIconPack.none%"
-          ],
-          "enum": [
-            "angular",
-            "angular_ngrx",
-            "react",
-            "react_redux",
-            "roblox",
-            "qwik",
-            "vue",
-            "vue_vuex",
-            "nest",
-            "none"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "angular",
+                "angular_ngrx",
+                "react",
+                "react_redux",
+                "roblox",
+                "qwik",
+                "vue",
+                "vue_vuex",
+                "nest",
+                "none"
+              ],
+              "default": "angular",
+              "description": "%configuration.activeIconPack%",
+              "enumDescriptions": [
+                "%configuration.activeIconPack.angular%",
+                "%configuration.activeIconPack.angular_ngrx%",
+                "%configuration.activeIconPack.react%",
+                "%configuration.activeIconPack.react_redux%",
+                "%configuration.activeIconPack.roblox%",
+                "%configuration.activeIconPack.qwik%",
+                "%configuration.activeIconPack.vue%",
+                "%configuration.activeIconPack.vue_vuex%",
+                "%configuration.activeIconPack.nest%",
+                "%configuration.activeIconPack.none%"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "angular",
+                  "angular_ngrx",
+                  "react",
+                  "react_redux",
+                  "roblox",
+                  "qwik",
+                  "vue",
+                  "vue_vuex",
+                  "nest",
+                  "none"
+                ]
+              },
+              "default": [
+                "angular"
+              ],
+              "description": "%configuration.activeIconPack%",
+              "minItems": 1,
+              "uniqueItems": true
+            }
           ]
         },
         "material-icon-theme.files.associations": {
@@ -265,6 +293,7 @@
                     "angular_ngrx",
                     "react",
                     "react_redux",
+                    "roblox",
                     "qwik",
                     "vue",
                     "vue_vuex",

@@ -81,7 +81,12 @@ const getConfigValue = <T>(
   if (themeConfig === undefined) {
     return undefined;
   }
-  if (
+  // If either value is an array, do not merge, just use workspaceValue or globalValue
+  if (Array.isArray(themeConfig.workspaceValue)) {
+    configValue = themeConfig.workspaceValue;
+  } else if (Array.isArray(themeConfig.globalValue)) {
+    configValue = themeConfig.globalValue;
+  } else if (
     typeof themeConfig.workspaceValue === 'object' &&
     themeConfig.workspaceValue &&
     themeConfig.globalValue

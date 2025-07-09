@@ -14,3 +14,5 @@ export enum IconPack {
 }
 
 export type IconPackValue = `${IconPack}` | '';
+// Change to array type for multi-pack support
+export type IconPackValues = IconPackValue[];

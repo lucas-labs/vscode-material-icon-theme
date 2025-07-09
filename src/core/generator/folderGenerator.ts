@@ -185,15 +185,15 @@ const getEnabledFolderTheme = (
  */
 const disableIconsByPack = (
   folderIcons?: FolderTheme,
-  activatedIconPack?: IconPackValue
+  activatedIconPacks: IconPackValue[] = []
 ): FolderIcon[] => {
   if (!folderIcons?.icons || folderIcons.icons.length === 0) {
     return [];
   }
   return folderIcons.icons.filter((icon) => {
-    return !icon.enabledFor
-      ? true
-      : icon.enabledFor.some((p) => p === activatedIconPack);
+    if (!icon.enabledFor) return true;
+    const packs = Array.isArray(activatedIconPacks) ? activatedIconPacks : [];
+    return icon.enabledFor.some((p) => packs.includes(p));
   });
 };
 

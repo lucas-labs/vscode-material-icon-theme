@@ -162,16 +162,16 @@ const getCustomIcons = (
  * Disable all language icons that are in a pack which is disabled.
  *
  * @param languageIcons - The language icons to be filtered.
- * @param activatedIconPack - The active icon pack to be considered.
- * @returns The filtered language icons that are enabled for the active icon pack.
+ * @param activatedIconPacks - The active icon packs to be considered.
+ * @returns The filtered language icons that are enabled for the active icon packs.
  */
 const disableLanguagesByPack = (
   languageIcons: LanguageIcon[],
-  activatedIconPack: IconPackValue | undefined
+  activatedIconPacks: IconPackValue[] = []
 ): LanguageIcon[] => {
   return languageIcons.filter((icon) => {
-    return !icon.enabledFor
-      ? true
-      : icon.enabledFor.some((p) => p === activatedIconPack);
+    if (!icon.enabledFor) return true;
+    const packs = Array.isArray(activatedIconPacks) ? activatedIconPacks : [];
+    return icon.enabledFor.some((p) => packs.includes(p));
   });
 };

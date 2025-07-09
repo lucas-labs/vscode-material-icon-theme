@@ -1,5 +1,6 @@
 import { merge } from '../../helpers/object';
 import type { Config } from '../../models/icons/config';
+import type { IconPackValue } from '../../models/icons/iconPack';
 import type { RecursivePartial } from '../../types/recursivePartial';
 
 const defaultColor = '#90a4ae'; // blue-gray-300
@@ -18,7 +19,7 @@ export const getDefaultConfig = (): Required<Config> => ({
     color: defaultColor,
     associations: {},
   },
-  activeIconPack: 'angular',
+  activeIconPack: ['angular'],
   hidesExplorerArrows: false,
   opacity: 1,
   saturation: 1,
@@ -41,7 +42,17 @@ export const getDefaultConfig = (): Required<Config> => ({
 export const padWithDefaultConfig = (
   config?: RecursivePartial<Config>
 ): Config => {
-  const withDefaultConfig = merge(getDefaultConfig(), config ?? {}) as Config;
+  // Defensive: if user config has activeIconPack, use it directly (as array), don't merge arrays
+  const base = getDefaultConfig();
+  const withDefaultConfig = merge(base, config ?? {}) as Config;
+
+  if (config && Array.isArray(config.activeIconPack)) {
+    withDefaultConfig.activeIconPack = config.activeIconPack.filter(
+      (v) => typeof v === 'string'
+    ) as IconPackValue[];
+  } else if (config && typeof config.activeIconPack === 'string') {
+    withDefaultConfig.activeIconPack = [config.activeIconPack];
+  }
 
   return withDefaultConfig;
 };

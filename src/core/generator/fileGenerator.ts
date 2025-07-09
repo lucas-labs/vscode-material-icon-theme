@@ -178,17 +178,17 @@ const mapSpecificFileIcons = (
  * Disable all file icons that are in a pack which is disabled.
  *
  * @param fileIcons - The file icons to be filtered.
- * @param activeIconPack - The active icon pack to be considered.
- * @returns The filtered file icons that are enabled for the active icon pack.
+ * @param activeIconPacks - The active icon packs to be considered.
+ * @returns The filtered file icons that are enabled for the active icon packs.
  */
 const disableIconsByPack = (
   fileIcons: FileIcons,
-  activeIconPack: IconPackValue
+  activeIconPacks: IconPackValue[]
 ): FileIcon[] => {
   return fileIcons.icons.filter((icon) => {
-    return !icon.enabledFor
-      ? true
-      : icon.enabledFor.some((p) => p === activeIconPack);
+    if (!icon.enabledFor) return true;
+    const packs = Array.isArray(activeIconPacks) ? activeIconPacks : [];
+    return icon.enabledFor.some((p) => packs.includes(p));
   });
 };
 

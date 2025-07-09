@@ -311,7 +311,7 @@ describe('folder icons', () => {
 
   it('should disable icon packs', () => {
     const manifest = createEmptyManifest();
-    config.activeIconPack = '';
+    config.activeIconPack = [];
     const iconDefinitions = loadFolderIconDefinitions(
       folderIcons,
       config,

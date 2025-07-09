@@ -45,7 +45,12 @@ export const customClonesIcons = async (
     for (const clone of clones ?? []) {
       if (
         clone.activeForPacks === undefined ||
-        clone.activeForPacks.includes(config.activeIconPack)
+        (Array.isArray(config.activeIconPack) &&
+        Array.isArray(clone.activeForPacks)
+          ? clone.activeForPacks
+              .filter((p) => typeof p === 'string')
+              .some((p) => config.activeIconPack.includes(p))
+          : false)
       ) {
         const cloneCfg = await createIconClone(clone, manifest, hash);
         clonedIconsManifest = merge(clonedIconsManifest, cloneCfg);

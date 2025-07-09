@@ -7,7 +7,7 @@ import type { IconPackValue } from './iconPack';
 import type { LanguageIcon } from './languages/languageIdentifier';
 
 export type Config = {
-  activeIconPack: IconPackValue;
+  activeIconPack: IconPackValue[];
   hidesExplorerArrows: boolean;
   opacity: number;
   saturation: number;
